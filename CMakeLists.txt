@@ -1,9 +1,12 @@
 cmake_minimum_required (VERSION 2.6)
 project (FiveHundred)
 
+SET(CMAKE_BUILD_TYPE DEBUG)
+
 set(CMAKE_CXX_FLAGS "-Wall -Werror -std=c++11")
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
 set(CMAKE_CXX_FLAGS_MULTITHREADING "-pthread -fopenmp -fpic -DNDEBUG -DUSE_OPENMP -rdynamic")
+set(CMAKE_CXX_FLAGS_PROFILING "-pg")
 
 add_subdirectory (${PROJECT_SOURCE_DIR}/ext/gtest/gtest-1.7.0)
 include_directories (${PROJECT_SOURCE_DIR}/src)
