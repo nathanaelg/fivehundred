@@ -9,6 +9,24 @@ TEST(Card, Initialize)
    EXPECT_EQ(Card::ace, card.number());
 }
 
+TEST(Card, Equality)
+{
+   Card card(Card::clubs, Card::seven);
+   Card card_copy(Card::clubs, Card::seven);
+
+   EXPECT_EQ(card_copy, card);
+}
+
+TEST(Card, Inequality)
+{
+   Card card(Card::clubs, Card::seven);
+   Card different_suit(Card::spades, Card::seven);
+   Card different_number(Card::clubs, Card::eight);
+
+   EXPECT_NE(different_suit, card);
+   EXPECT_NE(different_number, card);
+}
+
 TEST(Card, Colour)
 {
    Card red_card(Card::hearts, Card::ace);

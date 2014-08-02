@@ -20,6 +20,10 @@ public:
    enum colour_t {red, black, neither};
 
    Card(suit_t suit, number_t number);
+
+   friend bool operator== (Card const &c1, Card const &c2);
+   friend bool operator!= (Card const &c1, Card const &c2);
+
    suit_t suit() const;
    number_t number() const;
    colour_t colour() const;

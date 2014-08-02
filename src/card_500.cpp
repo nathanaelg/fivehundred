@@ -16,6 +16,18 @@ Card::Card(suit_t suit, number_t number)
 {
 }
 
+bool operator== (Card const &c1, Card const &c2)
+{
+   if (c1.suit() != c2.suit()) return false;
+   if (c1.number() != c2.number()) return false;
+   return true;
+}
+
+bool operator!= (Card const &c1, Card const &c2)
+{
+   return !(c1 == c2);
+}
+
 Card::suit_t Card::suit() const
 {
    return _suit;
