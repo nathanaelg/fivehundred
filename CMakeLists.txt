@@ -5,6 +5,7 @@ SET(CMAKE_BUILD_TYPE DEBUG)
 
 set(CMAKE_CXX_FLAGS "-Wall -Werror -std=c++11")
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 set(CMAKE_CXX_FLAGS_MULTITHREADING "-pthread -fopenmp -fpic -DNDEBUG -DUSE_OPENMP -rdynamic")
 set(CMAKE_CXX_FLAGS_PROFILING "-pg")
 
@@ -28,3 +29,13 @@ target_link_libraries(test_card_collection_500 gtest gtest_main)
 add_custom_command(TARGET test_card_collection_500
   POST_BUILD
   COMMAND ./test_card_collection_500)
+
+add_executable(test_hand_500
+  test/test_hand_500.cpp
+  src/card_500.cpp
+  src/card_collection_500.cpp
+  src/hand_500.cpp)
+target_link_libraries(test_hand_500 gtest gtest_main)
+add_custom_command(TARGET test_hand_500
+  POST_BUILD
+  COMMAND ./test_hand_500)
