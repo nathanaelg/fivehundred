@@ -19,7 +19,7 @@ public:
    enum number_t {ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, joker};
    enum colour_t {red, black, neither};
 
-   Card(suit_t suit, number_t number);
+   Card(number_t number, suit_t suit = none);
 
    friend bool operator== (Card const &c1, Card const &c2);
    friend bool operator!= (Card const &c1, Card const &c2);

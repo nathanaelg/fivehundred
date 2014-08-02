@@ -11,7 +11,7 @@ static Card::colour_t const suit_colour[] = {
    [Card::spades] = Card::black
 };
 
-Card::Card(suit_t suit, number_t number)
+Card::Card(number_t number, suit_t suit)
    : _suit(suit), _number(number), _colour(suit_colour[suit])
 {
 }
@@ -108,8 +108,8 @@ std::string Card::print_short_number() const
    return find_with_exception(print_short_number, _number);
 }
 
-Card_500::Card_500(suit_t s, number_t n)
-   : Card(s, n)
+Card_500::Card_500(number_t number, suit_t suit)
+   : Card(number, suit)
 {
 }
 
