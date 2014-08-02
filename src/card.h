@@ -19,15 +19,20 @@ public:
    enum number_t {ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, joker};
    enum colour_t {red, black, neither};
 
-   suit_t suit;
-   number_t number;
-   colour_t colour;
+   Card(suit_t suit, number_t number);
+   suit_t suit() const;
+   number_t number() const;
+   colour_t colour() const;
 
-   Card(suit_t, number_t);
    std::string print() const;
    std::string print_full() const;
    std::string print_short_suit() const;
    std::string print_short_number() const;
+
+protected:
+   suit_t const _suit;
+   number_t const _number;
+   colour_t const _colour;
 };
 
 #endif /* _CARD_H_ */
