@@ -12,10 +12,19 @@ add_subdirectory (${PROJECT_SOURCE_DIR}/ext/gtest/gtest-1.7.0)
 include_directories (${PROJECT_SOURCE_DIR}/src)
 include_directories (${PROJECT_SOURCE_DIR}/ext/gtest/gtest-1.7.0/include)
 
-add_executable(test_card_500 
-  test/test_card_500.cpp 
+add_executable(test_card_500
+  test/test_card_500.cpp
   src/card_500.cpp)
 target_link_libraries(test_card_500 gtest gtest_main)
 add_custom_command(TARGET test_card_500
   POST_BUILD
   COMMAND ./test_card_500)
+
+add_executable(test_card_collection_500
+  test/test_card_collection_500.cpp
+  src/card_500.cpp
+  src/card_collection_500.cpp)
+target_link_libraries(test_card_collection_500 gtest gtest_main)
+add_custom_command(TARGET test_card_collection_500
+  POST_BUILD
+  COMMAND ./test_card_collection_500)
