@@ -13,6 +13,14 @@ add_subdirectory (${PROJECT_SOURCE_DIR}/ext/gtest/gtest-1.7.0)
 include_directories (${PROJECT_SOURCE_DIR}/src)
 include_directories (${PROJECT_SOURCE_DIR}/ext/gtest/gtest-1.7.0/include)
 
+add_executable(test_console
+  test/test_console.cpp
+  src/console.cpp)
+target_link_libraries(test_console gtest gtest_main)
+add_custom_command(TARGET test_console
+  POST_BUILD
+  COMMAND ./test_console)
+
 add_executable(test_card_500
   test/test_card_500.cpp
   src/card_500.cpp)
