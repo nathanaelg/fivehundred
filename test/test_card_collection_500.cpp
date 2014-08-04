@@ -83,9 +83,9 @@ TEST(CardCollection, Sort)
    // Sort currently returns cards in hearts, diamonds, clubs, spades order,
    // and within a suit in order of value, currently only used for printing
 
-   cc.sort(Game_500::hearts, Card::hearts);
+   cc.sort(Game_500::hearts);
    EXPECT_EQ("{Jo,J♥,J♦,A♥,4♦,10♠}", cc.print());
 
-   cc.sort(Game_500::diamonds, Card::diamonds);
+   cc.sort(Game_500::diamonds);
    EXPECT_EQ("{A♥,Jo,J♦,J♥,4♦,10♠}", cc.print());
 }
