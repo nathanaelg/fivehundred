@@ -49,3 +49,15 @@ target_link_libraries(test_trick_500 gtest gtest_main)
 add_custom_command(TARGET test_trick_500
   POST_BUILD
   COMMAND ./test_trick_500)
+
+add_executable(test_deck_500
+  test/test_deck_500.cpp
+  src/card_500.cpp
+  src/card_collection_500.cpp
+  src/hand_500.cpp
+  src/kitty_500.cpp
+  src/deck_500.cpp)
+target_link_libraries(test_deck_500 gtest gtest_main)
+add_custom_command(TARGET test_deck_500
+  POST_BUILD
+  COMMAND ./test_deck_500)
