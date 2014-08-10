@@ -14,6 +14,7 @@ std::vector<Card_500 *> Hand_500::valid_moves(Game_500::suit_t trumps, Card::sui
 
 bool Hand_500::is_valid_move(Game_500::suit_t trumps, Card::suit_t led, Card_500 * card) const
 {
+   if (led == Card::none) return true;
    if (card->suit(trumps) == led) return true;
    if (cards_in_suit(led, trumps).empty()) return true;
    return false;
