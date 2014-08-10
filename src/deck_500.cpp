@@ -44,3 +44,10 @@ void Deck_500::deal(std::vector<Hand_500> * hands, Kitty_500 * kitty)
    for (unsigned i = 0; i < kitty->deal_size(); i++) kitty->add_card(&(*c++));
    kitty->sort(Game_500::no_trumps);
 }
+
+Card_500 * Deck_500::find(Card::number_t number, Card::suit_t suit)
+{
+   Card_500 card = Card_500(number, suit);
+   std::vector<Card_500>::iterator c = std::find(cards.begin(), cards.end(), card);
+   return (c == cards.end()) ? 0 : &(*c);
+}

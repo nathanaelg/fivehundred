@@ -11,6 +11,7 @@ public:
    void shuffle();
    void srand(unsigned seed);
    void deal(std::vector<Hand_500> * hands, Kitty_500 * kitty);
+   Card_500 * find(Card::number_t number, Card::suit_t suit);
 
 protected:
    unsigned random_seed;
