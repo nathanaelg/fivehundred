@@ -30,14 +30,13 @@ protected:
    unsigned const _max_size;
    unsigned const _deal_size;
 
-private:
    // Comparators required to use std::sort for sorting
-   struct number_compare
+   struct win_number_compare
    {
       Game_500::suit_t trumps;
       Card::suit_t led;
-      number_compare(Game_500::suit_t t, Card::suit_t l) { trumps = t; led = l; }
-      bool operator() (Card_500 * l, Card_500 * r) { return l->win_number(trumps, led) > r->win_number(trumps, led); }
+      win_number_compare(Game_500::suit_t t, Card::suit_t l) { trumps = t; led = l; }
+      bool operator() (Card_500 * l, Card_500 * r) { return l->win_number(trumps, led) < r->win_number(trumps, led); }
    };
    struct suit_compare
    {

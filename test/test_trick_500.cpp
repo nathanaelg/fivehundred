@@ -9,8 +9,9 @@ protected:
 
    Trick()
       : jack_hearts(Card::jack, Card::hearts), ace_diamonds(Card::ace, Card::diamonds),
-        five_clubs(Card::five, Card::clubs), jack_spades(Card::jack, Card::spades), trumps(Game_500::clubs)
+        five_clubs(Card::five, Card::clubs), jack_spades(Card::jack, Card::spades), trumps(Game_500::no_trumps)
    {
+      trick.leader = Game_500::player_2;
       trick.add_card(&jack_hearts);
       trick.add_card(&ace_diamonds);
       trick.add_card(&five_clubs);
@@ -23,8 +24,31 @@ TEST_F(Trick, LedSuit)
    EXPECT_EQ(Card::hearts, trick.led_suit(trumps));
 }
 
-TEST_F(Trick, Winner)
+TEST_F(Trick, WinnerNoTrumps)
 {
-   trick.leader = Game_500::player_2;
+   EXPECT_EQ(Game_500::player_2, trick.winner(trumps));
+}
+
+TEST_F(Trick, WinnerHearts)
+{
+   trumps = Game_500::hearts;
+   EXPECT_EQ(Game_500::player_2, trick.winner(trumps));
+}
+
+TEST_F(Trick, WinnerDiamonds)
+{
+   trumps = Game_500::diamonds;
+   EXPECT_EQ(Game_500::player_2, trick.winner(trumps));
+}
+
+TEST_F(Trick, WinnerSpades)
+{
+   trumps = Game_500::spades;
+   EXPECT_EQ(Game_500::player_1, trick.winner(trumps));
+}
+
+TEST_F(Trick, WinnerClubs)
+{
+   trumps = Game_500::clubs;
    EXPECT_EQ(Game_500::player_1, trick.winner(trumps));
 }

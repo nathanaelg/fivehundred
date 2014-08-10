@@ -53,7 +53,8 @@ bool CardCollection_500::has_card(Card_500 * card) const
 
 void CardCollection_500::sort(Game_500::suit_t trumps, Card::suit_t led)
 {
-   std::sort(cards.begin(), cards.end(), number_compare(trumps, led));
+   std::sort(cards.begin(), cards.end(), win_number_compare(trumps, led));
+   std::reverse(cards.begin(), cards.end());
    std::sort(cards.begin(), cards.end(), suit_compare(trumps));
 }
 
