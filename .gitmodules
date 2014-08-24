@@ -1,0 +1,3 @@
+[submodule "ext/petters/monte-carlo-tree-search"]
+	path = ext/petters/monte-carlo-tree-search
+	url = https://github.com/PetterS/monte-carlo-tree-search.git
