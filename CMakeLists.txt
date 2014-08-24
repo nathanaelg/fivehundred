@@ -14,6 +14,7 @@ set(CMAKE_CXX_FLAGS_PROFILING "-pg")
 add_subdirectory (${PROJECT_SOURCE_DIR}/ext/gtest/gtest-1.7.0)
 include_directories (${PROJECT_SOURCE_DIR}/src)
 include_directories (${PROJECT_SOURCE_DIR}/ext/gtest/gtest-1.7.0/include)
+include_directories (${PROJECT_SOURCE_DIR}/ext/petters/monte-carlo-tree-search)
 
 add_executable(test_console
   test/test_console.cpp
@@ -88,3 +89,11 @@ target_link_libraries(test_game_state_500 gtest gtest_main)
 add_custom_command(TARGET test_game_state_500
   POST_BUILD
   COMMAND ./test_game_state_500)
+
+add_executable(test_mcts
+  test/test_mcts.cpp
+  src/mcts.cpp)
+target_link_libraries(test_mcts gtest gtest_main)
+add_custom_command(TARGET test_mcts
+  POST_BUILD
+  COMMAND ./test_mcts)
