@@ -28,21 +28,20 @@ unsigned CardCollection_500::deal_size() const
 
 void CardCollection_500::add_card(Card_500 * card)
 {
-   if (cards.size() == _max_size) throw std::runtime_error("CardCollection can only contain " + std::to_string(_max_size) + " cards, cannot add another.");
+   if (cards.size() == _max_size) throw std::runtime_error("CardCollection can only contain "
+                                                           + std::to_string(_max_size)
+                                                           + " cards, cannot add another.");
    cards.push_back(card);
 }
 
 Card_500 * CardCollection_500::remove_card(Card_500 * card)
 {
-   for (std::vector<Card_500 *>::iterator i = cards.begin();
-        i != cards.end();
-        i++)
-   {
-      if (*(*i) != *card) continue;
-      cards.erase(i);
-      return card;
-   }
-   throw std::runtime_error("Could not find card in hand.");
+   auto card_iterator = std::find(cards.begin(), cards.end(), card);
+
+   if (card_iterator == cards.end()) throw std::runtime_error("Could not find card in hand.");
+
+   cards.erase(card_iterator);
+   return card;
 }
 
 bool CardCollection_500::has_card(Card_500 * card) const
