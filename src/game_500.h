@@ -10,6 +10,9 @@ public:
    enum variant_t {two_player, two_player_dummy, three_player, three_player_dummy, four_player, five_player};
    enum suit_t {none, hearts, diamonds, clubs, spades, no_trumps, misere};
    enum player_t {player_1, player_2, player_3, player_4};
+   enum stage_t {discarding_kitty, playing};
+
+   static player_t next_player(player_t current_player);
 };
 
 #endif /* _GAME_500_H_ */
