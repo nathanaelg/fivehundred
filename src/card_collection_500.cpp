@@ -34,27 +34,45 @@ void CardCollection_500::add_card(Card_500 * card)
    cards.push_back(card);
 }
 
-Card_500 * CardCollection_500::remove_card(Card_500 * card)
+void CardCollection_500::remove_card(Card_500 * card)
 {
-   auto card_iterator = std::find(cards.begin(), cards.end(), card);
+   auto card_iterator = std::find_if(cards.begin(),
+                                     cards.end(),
+                                     [card](Card_500 const * c) { return (*c == *card); });
 
    if (card_iterator == cards.end()) throw std::runtime_error("Could not find card in hand.");
 
    cards.erase(card_iterator);
-   return card;
+}
+
+void CardCollection_500::remove_card(Card::number_t number, Card::suit_t suit)
+{
+   Card_500 card = Card_500(number, suit);
+   remove_card(&card);
 }
 
 bool CardCollection_500::has_card(Card_500 * card) const
 {
-   if (std::find(cards.begin(), cards.end(), card) == cards.end()) return false;
-   return true;
+   auto card_iterator = std::find_if(cards.begin(),
+                                     cards.end(),
+                                     [card](Card_500 const * c) { return (*c == *card); });
+
+   return (card_iterator != cards.end());
+}
+
+bool CardCollection_500::has_card(Card::number_t number, Card::suit_t suit) const
+{
+   Card_500 card = Card_500(number, suit);
+   return has_card(&card);
 }
 
 void CardCollection_500::sort(Game_500::suit_t trumps, Card::suit_t led)
 {
    std::sort(cards.begin(), cards.end(), win_number_compare(trumps, led));
    std::reverse(cards.begin(), cards.end());
-   std::sort(cards.begin(), cards.end(), suit_compare(trumps));
+   std::sort(cards.begin(),
+             cards.end(),
+             [trumps] (Card_500 * l, Card_500 * r) { return l->suit(trumps) < r->suit(trumps); });
 }
 
 std::string CardCollection_500::print() const
@@ -74,4 +92,9 @@ std::vector<Card_500 *> CardCollection_500::cards_in_suit(Card::suit_t suit, Gam
    std::vector<Card_500 *> cards_in_suit;
    for (Card_500 * c : cards) if (c->suit(trumps) == suit) cards_in_suit.push_back(c);
    return cards_in_suit;
+}
+
+std::vector<Card_500 *> CardCollection_500::all_cards() const
+{
+   return cards;
 }

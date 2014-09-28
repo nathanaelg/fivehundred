@@ -42,7 +42,7 @@ TEST(CardCollection, AddCardTooMany)
    EXPECT_THROW(cc.add_card(&ten_spades), std::runtime_error);
 }
 
-TEST(CardCollection, RemoveCard)
+TEST(CardCollection, RemoveCard1)
 {
    CardCollection_500 cc(10);
    Card_500 card(Card::queen, Card::spades);
@@ -51,7 +51,21 @@ TEST(CardCollection, RemoveCard)
    EXPECT_EQ(1, cc.size());
    EXPECT_TRUE(cc.has_card(&card));
 
-   EXPECT_EQ(card, *cc.remove_card(&card));
+   cc.remove_card(&card);
+   EXPECT_EQ(0, cc.size());
+   EXPECT_FALSE(cc.has_card(&card));
+}
+
+TEST(CardCollection, RemoveCard2)
+{
+   CardCollection_500 cc(10);
+   Card_500 card(Card::queen, Card::spades);
+   cc.add_card(&card);
+
+   EXPECT_EQ(1, cc.size());
+   EXPECT_TRUE(cc.has_card(&card));
+
+   cc.remove_card(Card::queen, Card::spades);
    EXPECT_EQ(0, cc.size());
    EXPECT_FALSE(cc.has_card(&card));
 }

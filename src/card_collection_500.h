@@ -16,21 +16,19 @@ public:
    unsigned deal_size() const;
 
    void add_card(Card_500 * card);
-   Card_500 * remove_card(Card_500 * card);
+   void remove_card(Card_500 * card);
+   void remove_card(Card::number_t number, Card::suit_t suit);
    bool has_card(Card_500 * card) const;
+   bool has_card(Card::number_t number, Card::suit_t suit) const;
 
    // Printing
    std::string print() const;
    virtual std::string print_name(unsigned number) const;
+
    std::vector<Card_500 *> cards_in_suit(Card::suit_t suit, Game_500::suit_t trumps = Game_500::no_trumps) const;
+   std::vector<Card_500 *> all_cards() const;
    void sort(Game_500::suit_t trumps, Card::suit_t led = Card::none);
 
-protected:
-   std::vector<Card_500 *> cards;
-   unsigned const _max_size;
-   unsigned const _deal_size;
-
-   // Comparators required to use std::sort for sorting
    struct win_number_compare
    {
       Game_500::suit_t trumps;
@@ -38,12 +36,11 @@ protected:
       win_number_compare(Game_500::suit_t t, Card::suit_t l) { trumps = t; led = l; }
       bool operator() (Card_500 * l, Card_500 * r) { return l->win_number(trumps, led) < r->win_number(trumps, led); }
    };
-   struct suit_compare
-   {
-      Game_500::suit_t trumps;
-      suit_compare(Game_500::suit_t t) { trumps = t; }
-      bool operator() (Card_500 * l, Card_500 * r) { return l->suit(trumps) < r->suit(trumps); }
-   };
+
+protected:
+   std::vector<Card_500 *> cards;
+   unsigned const _max_size;
+   unsigned const _deal_size;
 };
 
 #endif /* _CARD_COLLECTION_500_H_ */
