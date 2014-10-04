@@ -12,7 +12,7 @@ static Card::colour_t const suit_colour[] = {
 };
 
 Card::Card(number_t number, suit_t suit)
-   : _suit(suit), _number(number), _colour(suit_colour[suit])
+   : suit_(suit), number_(number), colour_(suit_colour[suit])
 {
 }
 
@@ -30,22 +30,22 @@ bool operator!= (Card const &c1, Card const &c2)
 
 Card::suit_t Card::suit() const
 {
-   return _suit;
+   return suit_;
 }
 
 Card::number_t Card::number() const
 {
-   return _number;
+   return number_;
 }
 
 Card::colour_t Card::colour() const
 {
-   return _colour;
+   return colour_;
 }
 
 std::string Card::print() const
 {
-   if (_number == joker) return "Jo";
+   if (number_ == joker) return "Jo";
    return print_short_number() + print_short_suit();
 }
 
@@ -73,8 +73,8 @@ std::string Card::print_full() const
       {Card::king, "King"}
    };
 
-   if (_number == joker) return "The Joker";
-   return find_with_exception(print_full_number, _number) + " of " + find_with_exception(print_full_suit, _suit);
+   if (number_ == joker) return "The Joker";
+   return find_with_exception(print_full_number, number_) + " of " + find_with_exception(print_full_suit, suit_);
 }
 
 std::string Card::print_short_suit() const
@@ -85,7 +85,7 @@ std::string Card::print_short_suit() const
       {Card::spades, "♠"},
       {Card::clubs, "♣"}
    };
-   return find_with_exception(print_short_suit, _suit);
+   return find_with_exception(print_short_suit, suit_);
 }
 
 std::string Card::print_short_number() const
@@ -105,7 +105,7 @@ std::string Card::print_short_number() const
       {Card::queen, "Q"},
       {Card::king, "K"}
    };
-   return find_with_exception(print_short_number, _number);
+   return find_with_exception(print_short_number, number_);
 }
 
 Card_500::Card_500(number_t number, suit_t suit)
@@ -133,13 +133,13 @@ static Card::suit_t const card_from_game_suit[] = {
 
 Card::suit_t Card_500::suit(Game_500::suit_t trumps) const
 {
-   if ((_number == Card::jack) &&
-       (_colour == trumps_colour[trumps])) return card_from_game_suit[trumps];
+   if ((number_ == Card::jack) &&
+       (colour_ == trumps_colour[trumps])) return card_from_game_suit[trumps];
 
-   if ((_number == Card::joker) &&
+   if ((number_ == Card::joker) &&
        (trumps_colour[trumps] != Card::neither)) return card_from_game_suit[trumps];
 
-   return _suit;
+   return suit_;
 }
 
 bool Card_500::card_and_game_suit_equal(Card::suit_t card_suit, Game_500::suit_t game_suit) const
@@ -153,14 +153,14 @@ unsigned Card_500::win_number(Game_500::suit_t trumps, Card::suit_t led) const
 {
    // Card::number_t {ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, joker};
    static unsigned const base_win[] = {17, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20};
-   unsigned win_number = base_win[_number];
+   unsigned win_number = base_win[number_];
 
-   if (_number == Card::jack)
+   if (number_ == Card::jack)
    {
-      if (_colour == trumps_colour[trumps]) win_number = 18;
-      if (card_and_game_suit_equal(_suit, trumps)) win_number = 19;
+      if (colour_ == trumps_colour[trumps]) win_number = 18;
+      if (card_and_game_suit_equal(suit_, trumps)) win_number = 19;
    }
-   else if (_number == Card::joker)
+   else if (number_ == Card::joker)
    {
       if (trumps == Game_500::misere) win_number = 4;
       if (trumps == Game_500::no_trumps) win_number += 40;

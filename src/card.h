@@ -34,9 +34,9 @@ public:
    std::string print_short_number() const;
 
 protected:
-   suit_t _suit;
-   number_t _number;
-   colour_t _colour;
+   suit_t suit_;
+   number_t number_;
+   colour_t colour_;
 };
 
 #endif /* _CARD_H_ */

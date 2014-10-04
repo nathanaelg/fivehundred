@@ -39,8 +39,8 @@ public:
 
 protected:
    std::vector<Card_500 *> cards;
-   unsigned const _max_size;
-   unsigned const _deal_size;
+   unsigned const max_size_;
+   unsigned const deal_size_;
 };
 
 #endif /* _CARD_COLLECTION_500_H_ */

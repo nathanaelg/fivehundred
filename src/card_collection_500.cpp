@@ -2,12 +2,12 @@
 #include "card_collection_500.h"
 
 CardCollection_500::CardCollection_500(unsigned max_size)
-   : _max_size(max_size), _deal_size(max_size)
+   : max_size_(max_size), deal_size_(max_size)
 {
 }
 
 CardCollection_500::CardCollection_500(unsigned max_size, unsigned deal_size)
-   : _max_size(max_size), _deal_size(deal_size)
+   : max_size_(max_size), deal_size_(deal_size)
 {
 }
 
@@ -18,18 +18,18 @@ unsigned CardCollection_500::size() const
 
 unsigned CardCollection_500::max_size() const
 {
-   return _max_size;
+   return max_size_;
 }
 
 unsigned CardCollection_500::deal_size() const
 {
-   return _deal_size;
+   return deal_size_;
 }
 
 void CardCollection_500::add_card(Card_500 * card)
 {
-   if (cards.size() == _max_size) throw std::runtime_error("CardCollection can only contain "
-                                                           + std::to_string(_max_size)
+   if (cards.size() == max_size_) throw std::runtime_error("CardCollection can only contain "
+                                                           + std::to_string(max_size_)
                                                            + " cards, cannot add another.");
    cards.push_back(card);
 }
