@@ -151,8 +151,22 @@ bool Card_500::card_and_game_suit_equal(Card::suit_t card_suit, Game_500::suit_t
 
 unsigned Card_500::win_number(Game_500::suit_t trumps, Card::suit_t led) const
 {
-   // Card::number_t {ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, joker};
-   static unsigned const base_win[] = {17, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20};
+   static unsigned const base_win[] = {
+      [Card::ace] = 17,
+      [Card::two] = 5,
+      [Card::three] = 6,
+      [Card::four] = 7,
+      [Card::five] = 8,
+      [Card::six] = 9,
+      [Card::seven] = 10,
+      [Card::eight] = 11,
+      [Card::nine] = 12,
+      [Card::ten] = 13,
+      [Card::jack] = 14,
+      [Card::queen] = 15,
+      [Card::king] = 16,
+      [Card::joker] = 20
+   };
    unsigned win_number = base_win[number_];
 
    if (number_ == Card::jack)
