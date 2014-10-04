@@ -7,8 +7,8 @@ set(CMAKE_BUILD_TYPE RELEASE)
 
 set(CMAKE_CXX_FLAGS "-Wall -Werror -std=c++11")
 set(CMAKE_CXX_FLAGS_MULTITHREADING "-pthread -fopenmp -fpic -DNDEBUG -DUSE_OPENMP")
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g ${CMAKE_CXX_FLAGS_MULTITHREADING}")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 ${CMAKE_CXX_FLAGS_MULTITHREADING}")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g ${CMAKE_CXX_FLAGS_MULTITHREADING} -DBUILD_TYPE_DEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 ${CMAKE_CXX_FLAGS_MULTITHREADING} -DBUILD_TYPE_RELEASE")
 set(CMAKE_CXX_FLAGS_PROFILING "-pg")
 
 add_subdirectory (${PROJECT_SOURCE_DIR}/ext/gtest/gtest-1.7.0)
@@ -97,3 +97,19 @@ target_link_libraries(test_mcts gtest gtest_main)
 add_custom_command(TARGET test_mcts
   POST_BUILD
   COMMAND ./test_mcts)
+
+add_executable(test_mcts_500
+  test/test_mcts_500.cpp
+  src/console.cpp
+  src/card_500.cpp
+  src/card_collection_500.cpp
+  src/hand_500.cpp
+  src/kitty_500.cpp
+  src/trick_500.cpp
+  src/deck_500.cpp
+  src/game_state_500.cpp
+  src/mcts.cpp)
+target_link_libraries(test_mcts_500 gtest gtest_main)
+add_custom_command(TARGET test_mcts_500
+  POST_BUILD
+  COMMAND ./test_mcts_500)
