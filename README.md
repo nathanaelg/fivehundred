@@ -19,4 +19,5 @@
 
 ## Tests
 
-[![Build Status](https://drone.io/github.com/nathanaelg/fivehundred/status.png)](https://drone.io/github.com/nathanaelg/fivehundred/latest)
+[![Build Status](https://travis-ci.org/nathanaelg/fivehundred.svg?branch=master)](https://travis-ci.org/nathanaelg/fivehundred)
+[![Coverage Status](https://img.shields.io/coveralls/nathanaelg/fivehundred.svg)](https://coveralls.io/r/nathanaelg/fivehundred?branch=master)
